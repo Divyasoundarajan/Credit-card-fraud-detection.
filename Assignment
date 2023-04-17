@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_NODES 100
+
+int main() {
+    int n = 4;
+    int connections[4][2] = {{0,1},{1,2},{2,0},{1,3}};
+    bool connected[MAX_NODES] = {false}; // initialize all nodes as not connected
+    
+    // mark nodes that are connected
+    for (int i = 0; i < n-1; i++) {
+        int node1 = connections[i][0];
+        int node2 = connections[i][1];
+        connected[node1] = true;
+        connected[node2] = true;
+    }
+    
+    // find nodes that are not connected
+    int disconnected[MAX_NODES];
+    int num_disconnected = 0;
+    for (int i = 0; i < n; i++) {
+        if (!connected[i]) {
+            disconnected[num_disconnected] = i;
+            num_disconnected++;
+        }
+    }
+    
+    // print the result
+    printf("[ ");
+    for (int i = 0; i < num_disconnected; i++) {
+        printf("%d ", disconnected[i]);
+    }
+    printf("]\n");
+    
+    return 0;
+}
